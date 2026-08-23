@@ -85,7 +85,7 @@ jobs:
           mode: build
 
       - name: Build CLI
-        run: pnpm run cli:build
+        run: bun run cli:build
 
       - name: Setup mold linker
         if: runner.os == 'Linux'

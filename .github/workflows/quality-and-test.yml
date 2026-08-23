@@ -110,7 +110,7 @@ jobs:
           mode: build
 
       - name: Build CLI
-        run: pnpm run cli:build
+        run: bun run cli:build
 
       # dist/cli.js is a tracked build artifact; a bin/ change without the
       # regenerated dist/cli.js ships stale CLI behavior. Linux only to avoid
@@ -120,7 +120,7 @@ jobs:
         shell: bash
         run: |
           if ! git diff --exit-code -- dist/; then
-            echo "::error::dist/cli.js is out of sync with bin/. Run 'pnpm run cli:build' and commit the regenerated dist/cli.js."
+            echo "::error::dist/cli.js is out of sync with bin/. Run 'bun run cli:build' and commit the regenerated dist/cli.js."
             exit 1
           fi
 
@@ -162,7 +162,7 @@ jobs:
           mode: build
 
       - name: Run Full Test Suite (with real build)
-        run: pnpm test
+        run: bun test
         timeout-minutes: 30
         env:
           CI: true
