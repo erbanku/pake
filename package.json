@@ -64,7 +64,7 @@
     "ora": "^9.4.1",
     "prompts": "^2.4.2",
     "psl": "^1.15.0",
-    "sharp": "^0.34.5",
+    "sharp": "^0.35.3",
     "tmp-promise": "^3.0.3",
     "update-notifier": "^7.3.1"
   },
@@ -95,7 +95,7 @@
     ]
   },
   "overrides": {
-    "sharp": "^0.34.5",
+    "sharp": "^0.35.3",
     "@img/sharp-libvips-darwin-arm64": "1.2.4"
   }
 }
