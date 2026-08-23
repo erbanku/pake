@@ -72,8 +72,8 @@ var type = "module";
 var exports$1 = "./dist/cli.js";
 var license = "GPL-3.0-or-later";
 var dependencies = {
-	"@tauri-apps/api": "~2.11.1",
-	"@tauri-apps/cli": "^2.11.4",
+	"@tauri-apps/api": "~2.10.0",
+	"@tauri-apps/cli": "~2.10.0",
 	chalk: "^6.0.0",
 	commander: "^15.0.0",
 	execa: "^10.0.1",
