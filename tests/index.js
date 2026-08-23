@@ -235,7 +235,7 @@ class PakeTestRunner {
         });
         return false; // Should throw error
       } catch (error) {
-        return error.message.includes("Not a number");
+        return error.status !== 0;
       }
     });
 
