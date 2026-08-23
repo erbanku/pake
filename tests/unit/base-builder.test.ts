@@ -183,42 +183,26 @@ describe('BaseBuilder guards', () => {
     expect(execaMock).toHaveBeenCalledWith('pnpm', ['--version']);
   });
 
-  it('falls back to npm when the installed pnpm major does not match the pinned major', async () => {
-    const warnSpy = vi.spyOn(logger, 'warn').mockImplementation(() => {});
+  it('uses pnpm when packageManager is bun and pnpm is available', async () => {
     mockPackageManagers({ pnpm: '11.2.2', npm: '11.12.1' });
 
-    await expect(detectPackageManager()).resolves.toBe('npm');
+    await expect(detectPackageManager()).resolves.toBe('pnpm');
     expect(execaMock).toHaveBeenCalledWith('pnpm', ['--version']);
-    expect(execaMock).toHaveBeenCalledWith('npm', ['--version'], {
-      stdio: 'ignore',
-    });
-    expect(warnSpy).toHaveBeenCalledWith(
-      expect.stringContaining('using npm for package management instead'),
-    );
   });
 
-  it('parses v-prefixed pnpm versions before comparing majors', async () => {
-    const warnSpy = vi.spyOn(logger, 'warn').mockImplementation(() => {});
+  it('parses v-prefixed pnpm versions', async () => {
     mockPackageManagers({ pnpm: 'v11.2.2', npm: '11.12.1' });
 
-    await expect(detectPackageManager()).resolves.toBe('npm');
-    expect(warnSpy).toHaveBeenCalledWith(
-      expect.stringContaining('Detected pnpm v11.2.2'),
-    );
+    await expect(detectPackageManager()).resolves.toBe('pnpm');
   });
 
-  it('throws a clear error when pnpm is incompatible and npm is unavailable', async () => {
+  it('uses pnpm even when npm is unavailable if pnpm is installed', async () => {
     mockPackageManagers({
       pnpm: '11.2.2',
       npm: new Error('missing npm'),
     });
 
-    await expect(detectPackageManager()).rejects.toThrow(
-      'Detected pnpm v11.2.2, but Pake is pinned to pnpm@10.26.2',
-    );
-    expect(execaMock).toHaveBeenCalledWith('npm', ['--version'], {
-      stdio: 'ignore',
-    });
+    await expect(detectPackageManager()).resolves.toBe('pnpm');
   });
 
   it('falls back to npm when pnpm is unavailable', async () => {
