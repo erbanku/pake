@@ -33,11 +33,10 @@ jobs:
             exit 1
           fi
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          version: "10.26.2"
-          run_install: false
+          bun-version: 1.4.0
 
       - name: Setup Node.js
         uses: actions/setup-node@v6
@@ -47,19 +46,19 @@ jobs:
           package-manager-cache: false
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: bun install --frozen-lockfile
 
       - name: Check release version
         run: node scripts/check-release-version.mjs "${{ github.ref_type == 'tag' && github.ref_name || '' }}"
 
       - name: Check formatting
-        run: pnpm run format:check
+        run: bun run format:check
 
       - name: Run unit tests
         run: npx vitest run
 
       - name: Build CLI
-        run: pnpm run cli:build
+        run: bun run cli:build
 
       - name: Check package contents
         run: npm pack --dry-run --ignore-scripts

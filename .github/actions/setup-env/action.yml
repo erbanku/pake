@@ -6,7 +6,7 @@ inputs:
     description: |
       Setup mode:
       - build: Complete environment (Node + Rust + System deps + Cache)
-      - node: Node.js only (pnpm + Node 22)
+      - node: Node.js only (bun + Node 22)
       - rust: Rust only (toolchain + targets)
     required: false
     default: "build"
@@ -49,24 +49,22 @@ runs:
         esac
 
     # Node.js Environment Setup
-    - name: Install pnpm
+    - name: Setup Bun
       if: env.SETUP_NODE == 'true'
-      uses: pnpm/action-setup@v4
+      uses: oven-sh/setup-bun@v2
       with:
-        version: "10.26.2"
-        run_install: false
+        bun-version: 1.4.0
 
     - name: Setup Node.js
       if: env.SETUP_NODE == 'true'
       uses: actions/setup-node@v4
       with:
         node-version: "22"
-        cache: pnpm
 
     - name: Install dependencies
       if: env.SETUP_NODE == 'true'
       shell: bash
-      run: pnpm install --frozen-lockfile
+      run: bun install --frozen-lockfile
 
     # Rust Environment Setup
     - name: Setup Rust for Linux
