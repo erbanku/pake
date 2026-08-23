@@ -25,7 +25,7 @@ var description = "🤱🏻 Turn any webpage into a desktop app with one command
 var engines = {
 	node: ">=18.0.0"
 };
-var packageManager = "pnpm@10.26.2";
+var packageManager = "bun@1.4.0";
 var bin = {
 	pake: "dist/cli.js"
 };
@@ -72,16 +72,16 @@ var type = "module";
 var exports$1 = "./dist/cli.js";
 var license = "GPL-3.0-or-later";
 var dependencies = {
-	"@tauri-apps/api": "~2.10.1",
-	"@tauri-apps/cli": "^2.10.0",
-	chalk: "^5.6.2",
-	commander: "^14.0.3",
-	execa: "^9.6.1",
-	"file-type": "^21.3.0",
-	"fs-extra": "^11.3.3",
+	"@tauri-apps/api": "~2.11.1",
+	"@tauri-apps/cli": "^2.11.4",
+	chalk: "^6.0.0",
+	commander: "^15.0.0",
+	execa: "^10.0.1",
+	"file-type": "^22.0.2",
+	"fs-extra": "^11.4.0",
 	"icon-gen": "^5.0.0",
 	loglevel: "^1.9.2",
-	ora: "^9.3.0",
+	ora: "^9.4.1",
 	prompts: "^2.4.2",
 	psl: "^1.15.0",
 	sharp: "^0.34.5",
@@ -90,33 +90,33 @@ var dependencies = {
 };
 var devDependencies = {
 	"@rollup/plugin-alias": "^6.0.0",
-	"@rollup/plugin-commonjs": "^29.0.0",
+	"@rollup/plugin-commonjs": "^29.0.3",
 	"@rollup/plugin-json": "^6.1.0",
 	"@rollup/plugin-replace": "^6.0.3",
-	"@rollup/plugin-terser": "^0.4.4",
+	"@rollup/plugin-terser": "^1.0.0",
 	"@types/fs-extra": "^11.0.4",
-	"@types/node": "^25.3.2",
+	"@types/node": "^26.2.0",
 	"@types/prompts": "^2.4.9",
 	"@types/tmp": "^0.2.6",
 	"@types/update-notifier": "^6.0.8",
 	"app-root-path": "^3.1.0",
 	"cross-env": "^10.1.0",
-	prettier: "^3.8.1",
-	rollup: "^4.59.0",
-	"rollup-plugin-typescript2": "^0.36.0",
+	prettier: "^3.9.6",
+	rollup: "^4.62.5",
+	"rollup-plugin-typescript2": "^0.37.0",
 	tslib: "^2.8.1",
-	typescript: "^5.9.3",
-	vitest: "^4.0.18"
+	typescript: "~5.8.3",
+	vitest: "^4.1.11"
 };
 var pnpm = {
-	overrides: {
-		sharp: "^0.34.5",
-		"@img/sharp-libvips-darwin-arm64": "1.2.4"
-	},
 	onlyBuiltDependencies: [
 		"esbuild",
 		"sharp"
 	]
+};
+var overrides = {
+	sharp: "^0.34.5",
+	"@img/sharp-libvips-darwin-arm64": "1.2.4"
 };
 var packageJson = {
 	name: name,
@@ -135,7 +135,8 @@ var packageJson = {
 	license: license,
 	dependencies: dependencies,
 	devDependencies: devDependencies,
-	pnpm: pnpm
+	pnpm: pnpm,
+	overrides: overrides
 };
 
 // Convert the current module URL to a file path
